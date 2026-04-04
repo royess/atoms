@@ -1,0 +1,42 @@
+{
+  "simulation": {
+    "trajectories": 1000,
+    "time_step_s": 2e-08,
+    "initial_temperature_k": 5e-06,
+    "distance_m": 1e-05,
+    "duration_s": 0.0001,
+    "beam_waist_m": 1e-06,
+    "peak_intensity_w_m2": 20000000000.0,
+    "saturation_parameter": 0.2,
+    "detuning_in_gamma": -0.5,
+    "random_seed": 12345
+  },
+  "species": [
+    {
+      "key": "rb87",
+      "label": "Rb-87",
+      "final_survival_probability": 1.0,
+      "max_kinetic_temperature_k": 4.523530473686807e-05,
+      "final_kinetic_temperature_k": 4.523530473686807e-05,
+      "final_trapped_kinetic_temperature_k": 4.523530473686807e-05,
+      "trap_depth_k": 0.001,
+      "gamma_rad_s": 38076102.96150829,
+      "effective_polarizability_si": 3.6648205648681964e-39,
+      "diffusion_coefficient_kg2_m2_s3": 1.2482036498280425e-48,
+      "recoil_energy_k": 1.8097913460579355e-07
+    },
+    {
+      "key": "yb171",
+      "label": "Yb-171",
+      "final_survival_probability": 0.006,
+      "max_kinetic_temperature_k": 8.324922780925212e-05,
+      "final_kinetic_temperature_k": 5.772730486983171e-05,
+      "final_trapped_kinetic_temperature_k": 6.231613493637919e-06,
+      "trap_depth_k": 0.0001,
+      "gamma_rad_s": 1143539.7259066848,
+      "effective_polarizability_si": 3.664820564868196e-40,
+      "diffusion_coefficient_kg2_m2_s3": 7.387603008816795e-50,
+      "recoil_energy_k": 1.8133392439198283e-07
+    }
+  ]
+}
