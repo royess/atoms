@@ -52,6 +52,26 @@ The CLI writes:
 - `survival_probability.png`
 - `summary.json`
 
+Run the survival-versus-speed sweep and estimate the `50%` survival speed limit:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m atoms.speed_scan
+```
+
+Use an explicit duration grid when you want to bracket the transition more tightly:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m atoms.speed_scan \
+  --durations-s 2e-5 3e-5 5e-5 7.5e-5 1e-4 1.5e-4 \
+  --target-survival 0.5 \
+  --output-dir outputs/speed_scan
+```
+
+The sweep CLI writes:
+
+- `survival_vs_speed.png`
+- `speed_scan_summary.json`
+
 ## Notes
 
 - The atomic constants match `AGENTS.md`.
@@ -59,6 +79,8 @@ The CLI writes:
 - The tweezer force is implemented through `U(x) = -(1/(2 eps0 c)) Re(alpha_eff) I(x)` with `alpha_eff` back-computed from the requested trap depth and the configured peak intensity.
 - Survival is defined by the 1D classical bound-state condition `p^2/(2m) + U(x) < 0`.
 - `kinetic_temperature.png` reports the full-ensemble momentum variance. `summary.json` also records the final trapped-only kinetic temperature when survivors remain.
+- The speed scan defines shuttle speed as the average speed `distance / duration` for the fixed-distance minimum-jerk move.
+- The reported speed limit is the interpolated average speed where final survival crosses the target probability, using a monotone envelope of the sampled survival curve to suppress Monte Carlo noise.
 
 ## Tests
 

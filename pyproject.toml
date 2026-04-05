@@ -17,6 +17,7 @@ dependencies = [
 
 [project.scripts]
 atoms-sim = "atoms.simulate:main"
+atoms-speed-scan = "atoms.speed_scan:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/atoms"]

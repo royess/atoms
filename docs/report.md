@@ -257,6 +257,36 @@ The result matches the intended physical picture:
 
 One detail worth noting is that `Rb-87` has the larger diffusion coefficient in this model. That does not contradict the outcome. Diffusion alone does not determine survival; the broader transition also provides much more cooling power and a much more forgiving damping bandwidth.
 
+## Survival-Versus-Speed Extension
+
+The repository now also includes a dedicated survival-speed sweep entrypoint, [speed_scan.py](../src/atoms/speed_scan.py), for extracting a species-dependent shuttle speed limit from the same transport model.
+
+The sweep holds distance fixed and varies duration, then reports speed as
+
+```text
+v_avg = distance / duration
+```
+
+For a chosen target survival probability, default `0.5`, the code estimates the speed limit by:
+
+1. sampling final survival probability over a duration grid
+2. sorting the results by average speed
+3. applying a monotone non-increasing envelope to suppress Monte Carlo noise
+4. linearly interpolating the crossing with the target survival level
+
+Read-only exploratory sweeps on the current defaults already show the expected ordering:
+
+- `Yb-171` transitions from near-zero survival at `0.10-0.20 m/s` to near-unity survival by about `0.067 m/s`
+- `Rb-87` remains robust at `0.20-0.33 m/s` and only fails deeper in the fast-shuttle regime
+
+So the present model supports the conceptual statement that each species has a survival-limited transport speed, and that the `50%` threshold speed for `Yb-171` is well below that of `Rb-87`.
+
+Use the sweep CLI with:
+
+```bash
+.venv/bin/python -m atoms.speed_scan --output-dir outputs/speed_scan
+```
+
 ### Generated Figures
 
 Phase-space trajectories:
@@ -325,4 +355,3 @@ If the next step is improving physical fidelity rather than keeping the model mi
 2. Replace the effective-depth calibration with species-specific tweezer wavelength and polarizability data.
 3. Add parameter sweeps over shuttle duration, detuning, and saturation to map the Rb/Yb transport stability boundary.
 4. Add batch scripts to generate multi-run reports from a grid of transport profiles.
-
